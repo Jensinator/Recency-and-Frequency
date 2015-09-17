@@ -1,8 +1,6 @@
 package com.hszg.services;
 
-import java.awt.Point;
-import java.util.ArrayList;
-import java.util.List;
+import com.hszg.dto.Point;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -23,13 +21,9 @@ public class Recency {
 	@GET
 	@Path("/RecencyDistribution")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Point> getRecencyDistribution(){
+	public Point getRecencyDistribution(){
 		
-		List<Point> distribution = new ArrayList<Point>();
-		
-		distribution.add(new Point(2,5));
-		
-		return distribution;
+		return new Point(1.0f,13.0f);
 	}
 	
 }
