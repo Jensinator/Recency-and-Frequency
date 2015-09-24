@@ -1,6 +1,7 @@
 package com.hszg.services;
 
 import com.hszg.dto.Point;
+import com.hszg.dto.RecencyDistribution;
 import com.kianaanalytics.computeNode.dataaccess.PersonVisibleAccessService;
 import com.kianaanalytics.computeNode.model.PersonVisibleResult;
 
@@ -23,15 +24,20 @@ public class Recency {
 	@GET
 	@Path("/RecencyDistribution")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Point getRecencyDistribution(){
+	public RecencyDistribution getRecencyDistribution(){
 		
 		PersonVisibleAccessService observationService = new PersonVisibleAccessService();
 		
-		//PersonVisibleResult Observations = observationService.computePersonVisible();
+		PersonVisibleResult observations = observationService.computePersonVisible();
+		RecencyDistribution distribution = null;
+		try {
+			distribution = com.hszg.recency.Recency.compute(observations.keySet().toArray()[0].toString(),observations);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		//observationService.showResults( Observations.getResultCollection() );
-		
-		return new Point(1.0f,13.0f);
+		return distribution;
 	}
 	
 }
