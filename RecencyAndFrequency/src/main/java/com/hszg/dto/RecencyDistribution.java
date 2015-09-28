@@ -5,7 +5,7 @@ import java.util.List;
 
 public class RecencyDistribution {
 	
-	public class Point{
+	public static class Point{
 		
 		private int x;
 		private int y;
@@ -105,6 +105,28 @@ public class RecencyDistribution {
 		
 	}
 
+	/** This method adds combines the current distribution with another one.
+	 * 
+	 * */
+	public void add( RecencyDistribution distribution ){
+		
+		for( int i = 0; i < distribution.getDistribution().size(); i++ ){
+			for( int j = 0; j < distribution.getDistribution().get(i).getY(); j++ ){
+				addRecencyValue( distribution.getDistribution().get(i).getX() );
+			}	
+		}
+
+	}
 	
+	/**
+	 * 
+	 * */
+	public void addToFrequency( RecencyDistribution distribution ){
+		
+		for( int i = 0; i < distribution.getDistribution().size(); i++ ){
+			addRecencyValue( distribution.getDistribution().get(i).getX() );
+		}
+		
+	}
 	
 }

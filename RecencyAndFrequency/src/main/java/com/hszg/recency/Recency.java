@@ -1,7 +1,5 @@
 package com.hszg.recency;
 
-
-
 import com.hszg.dto.RecencyDistribution;
 import com.kianaanalytics.computeNode.model.ObservationOfClientMac;
 import com.kianaanalytics.computeNode.model.ObservationsOfClientMac;
@@ -9,6 +7,9 @@ import com.kianaanalytics.computeNode.model.PartialObservation;
 import com.kianaanalytics.computeNode.model.PersonVisibleResult;
 import com.kianaanalytics.computeNode.util.BigQueryDate;
 
+/** This class contains functions to compute a Recency Distribution
+ *	based on a client mac address.
+ */
 public class Recency {
 	
 	
