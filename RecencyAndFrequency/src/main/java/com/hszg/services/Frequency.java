@@ -15,21 +15,12 @@ import com.kianaanalytics.computeNode.model.PersonVisibleResult;
 @Path("/Frequency")
 public class Frequency  {
 
-	@GET
-	@Path("/HelloWorld")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<String> sayHello(){
-		// http://localhost:8080/RecencyAndFrequency/Frequency/HelloWorld/
-		return new ArrayList<String>();
-	}
-	
 	
 	@GET
 	@Path("/FrequencyDistribution")
 	@Produces(MediaType.APPLICATION_JSON)
 	public RecencyDistribution getFrequencyDistribution(){
 			
-		
 		PersonVisibleAccessService observationService = new PersonVisibleAccessService();
 		PersonVisibleResult observations = observationService.computePersonVisible();
 		

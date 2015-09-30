@@ -7,6 +7,11 @@ import com.kianaanalytics.computeNode.model.PersonVisibleResult;
 
 public class Frequency {
 
+	/** This function computes the frequency distribution for all client
+	 * 	macs.
+	 *  @param observations - observations for each client mac address.
+	 *  @return The distribution for frequency.
+	 * */
 	public static RecencyDistribution compute( PersonVisibleResult observations ){
 		
 		RecencyDistribution distribution = new RecencyDistribution();
@@ -14,8 +19,6 @@ public class Frequency {
 		for( int i = 0; i < observations.keySet().size(); i++ ){
 			
 			String clientMac = observations.keySet().toArray()[i].toString();
-			
-			ObservationsOfClientMac clientObservations = observations.get(clientMac);
 				
 			RecencyDistribution clientDistribution;
 			try{
@@ -24,10 +27,11 @@ public class Frequency {
 				clientDistribution = new RecencyDistribution();
 			}
 			
-			distribution.addToFrequency(clientDistribution);
+			RecencyDistribution frequency = RecencyDistribution.addToFrequency(distribution, clientDistribution);
+			
+			distribution.add(frequency);
 			
 		}
-		
 		
 		return distribution;
 	}

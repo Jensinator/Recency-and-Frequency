@@ -45,13 +45,32 @@ public class RecencyDistribution {
 		public void setY(int y) {
 			this.y = y;
 		}
+		
+		@Override
+		public boolean equals( Object o ){
+			
+			if ( o == null )
+				return false;
+
+			if ( o == this )
+				return true;
+			
+			Point point = (Point) o;
+			
+			if( this.getX() != point.getX() )
+				return false;
+			if( this.getY() != point.getY() )
+				return false;
+			
+			return true;
+		}
 	}
 	
 	public static final int NO_RECENCY = -1;
 	
 	private List<Point> distribution;
 	
-	/**
+	/** Constructor to create an empty distribution.
 	 *
 	 */
 	public RecencyDistribution(){
@@ -59,8 +78,8 @@ public class RecencyDistribution {
 	}
 	
 	
-	/**
-	 * 
+	/** Return the data of the distribution.
+	 *  @return distribution as sorted list.
 	 */
 	public List<Point> getDistribution(){
 		return distribution;
@@ -68,7 +87,7 @@ public class RecencyDistribution {
 	
 	
 	/** This method adds a recency value to the distribution and 
-	 *  adjust this one.
+	 *  adjust this one. The resulting distribution is always sorted.
 	 *	@recency - Value to add.
 	 */
 	public void addRecencyValue( int recency ){
@@ -81,32 +100,51 @@ public class RecencyDistribution {
 		if( distribution.size() == 0 ){
 			Point dataPoint = new Point(recency, 1);
 			distribution.add(dataPoint);
+			return;
 		}
 		
+		// check first element
+		if( distribution.size() >= 1 ){
+			
+			if( recency < distribution.get(0).x ){
+				distribution.add(0, new Point(recency,1));
+				return;
+			
+			}else if( recency == distribution.get(0).x){
+				distribution.get(0).y++;
+				return;
+			}
+			
+		}
 		
-		for( int i = 0; i < distribution.size(); i++ ){
+		// go throught list while recency is bigger
+		for( int i = 0; i < distribution.size()-1; i++ ){
 			
 			if( distribution.get(i) == null ){
 				continue;
 			}
 
-			if( recency == distribution.get(i).x ){
-				distribution.get(i).y++;
-				break;
+			if( recency == distribution.get(i+1).x ){
+				distribution.get(i+1).y++;
+				return;
 			}
 			
-			if( recency > distribution.get(i).x){
-				Point dataPoint = new Point(recency,1);
-				distribution.add(i, dataPoint);
-				break;
+			if( recency < distribution.get(i+1).x){
+				distribution.add(i+1, new Point(recency,1));
+				return;
 			}
 			
 		}
 		
+		// no value found in list, recency is biggest and will be pushed to the end
+		distribution.add( new Point(recency, 1));
+		
 	}
 
+	
 	/** This method adds combines the current distribution with another one.
-	 * 
+	 *	to create a recency distribution.
+	 *	@param distribution - The distribution to combine with.
 	 * */
 	public void add( RecencyDistribution distribution ){
 		
@@ -118,15 +156,22 @@ public class RecencyDistribution {
 
 	}
 	
-	/**
-	 * 
+	/** This method combines two distributions to create a frequency distribution.
+	 *  @param distribution - The distribution to combine with.
 	 * */
-	public void addToFrequency( RecencyDistribution distribution ){
+	public static RecencyDistribution addToFrequency( RecencyDistribution distribution1, RecencyDistribution distribution2 ){
 		
-		for( int i = 0; i < distribution.getDistribution().size(); i++ ){
-			addRecencyValue( distribution.getDistribution().get(i).getX() );
+		RecencyDistribution distribution = new RecencyDistribution();
+		
+		for( int i = 0; i < distribution1.getDistribution().size(); i++ ){
+			distribution.addRecencyValue( distribution1.getDistribution().get(i).getX() );
 		}
 		
+		for( int i = 0; i < distribution2.getDistribution().size(); i++ ){
+			distribution.addRecencyValue( distribution2.getDistribution().get(i).getX() );
+		}
+		
+		return distribution;
 	}
 	
 }
