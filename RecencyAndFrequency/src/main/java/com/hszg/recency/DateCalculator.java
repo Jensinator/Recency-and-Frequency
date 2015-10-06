@@ -20,6 +20,7 @@ public class DateCalculator {
 		date.setSeconds(0);
 		
 		return date;
+		
 	}
 	
 	/** This function computes the number of days between two dates.
