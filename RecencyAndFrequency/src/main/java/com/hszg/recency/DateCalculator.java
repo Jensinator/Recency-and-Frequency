@@ -33,6 +33,11 @@ public class DateCalculator {
 		long diffInMs = endTimeInMs - startTimeInMs;
 		
 		long diffInDays = diffInMs/(1000 * 60 * 60 * 24);
+		
+		if(diffInDays < 0){
+			
+			throw new IllegalArgumentException("Endtime has to be greater than starttime.");
+		}
 	
 		return (int)diffInDays;
 	}
