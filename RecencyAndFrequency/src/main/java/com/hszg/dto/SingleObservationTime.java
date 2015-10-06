@@ -39,7 +39,7 @@ public class SingleObservationTime {
 			this.minutesPerTenth = "" + (date.getMinutes() / 10);
 			this.hours = "" + date.getHours();
 			this.day = "" + date.getDate();
-			this.month = "" + date.getMonth();
+			this.month = "" + (date.getMonth() + 1);
 			this.year = "" + (date.getYear() +1900);
 		}
 		
