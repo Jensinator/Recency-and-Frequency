@@ -11,4 +11,10 @@ public class SingleObservationTimeTest {
 		fail("Not yet implemented");
 	}
 
+	
+	@Test
+	public void testCreate() {
+		fail("Not yet implemented");
+	}
+	
 }
