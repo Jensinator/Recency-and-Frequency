@@ -15,7 +15,7 @@ public class SingleObservationTimeTest {
 	@Test
 	public void testDateConstructor() {
 		
-SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
 		
 		String dateString = "2015-12-03 00:01:55";
 		Date date = null;

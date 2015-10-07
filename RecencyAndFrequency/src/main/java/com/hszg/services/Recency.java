@@ -1,6 +1,5 @@
 package com.hszg.services;
 
-import com.hszg.dto.Point;
 import com.hszg.dto.Distribution;
 import com.kianaanalytics.computeNode.dataaccess.PersonVisibleAccessService;
 import com.kianaanalytics.computeNode.model.ObservationOfClientMac;
@@ -30,8 +29,6 @@ public class Recency {
 		for( int i = 0; i < observations.keySet().size();i++ ){
 			
 			String clientMac = (String) observations.keySet().toArray()[i];
-			
-			System.out.println("Client Mac " + clientMac);
 			
 			try {
 				Distribution clientRecencyDistribution = com.hszg.recency.Recency.compute(clientMac,observations);
