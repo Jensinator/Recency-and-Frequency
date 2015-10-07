@@ -1,6 +1,6 @@
 package com.hszg.recency;
 
-import com.hszg.dto.RecencyDistribution;
+import com.hszg.dto.Distribution;
 import com.kianaanalytics.computeNode.model.ObservationOfClientMac;
 import com.kianaanalytics.computeNode.model.ObservationsOfClientMac;
 import com.kianaanalytics.computeNode.model.PartialObservation;
@@ -19,18 +19,18 @@ public class Recency {
 	 *	@return Recency for the client mac.
 	 *  @throws Exception 
 	 */
-	public static RecencyDistribution compute( String clientMac, PersonVisibleResult observations ) throws Exception{
+	public static Distribution compute( String clientMac, PersonVisibleResult observations ) throws Exception{
 		
 		ObservationsOfClientMac observationsForClientMac = observations.get(clientMac);
 		if( observationsForClientMac == null ){
 			throw new Exception("There are no observations for client mac : " + clientMac );
 		}
 		
-		RecencyDistribution distribution = new RecencyDistribution();
+		Distribution distribution = new Distribution();
 		
 		// elementary event
 		if(observationsForClientMac.size() < 2 ){
-			distribution.addRecencyValue(RecencyDistribution.NO_RECENCY);
+			distribution.addValue(Distribution.NO_RECENCY);
 		}
 		
 		// normal event
@@ -41,7 +41,7 @@ public class Recency {
 			
 			int recency = computeRecency(observation1, observation2);
 			
-			distribution.addRecencyValue(recency);
+			distribution.addValue(recency);
 			
 		}
 		

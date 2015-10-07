@@ -3,7 +3,7 @@ package com.hszg.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecencyDistribution {
+public class Distribution {
 	
 	public static class Point{
 		
@@ -73,7 +73,7 @@ public class RecencyDistribution {
 	/** Constructor to create an empty distribution.
 	 *
 	 */
-	public RecencyDistribution(){
+	public Distribution(){
 		distribution = new ArrayList<Point>();
 	}
 	
@@ -90,7 +90,7 @@ public class RecencyDistribution {
 	 *  adjust this one. The resulting distribution is always sorted.
 	 *	@recency - Value to add.
 	 */
-	public void addRecencyValue( int recency ){
+	public void addValue( int recency ){
 		
 		if( recency < NO_RECENCY ){
 			throw new IllegalArgumentException("recency has to be positive value.");
@@ -146,11 +146,11 @@ public class RecencyDistribution {
 	 *	to create a recency distribution.
 	 *	@param distribution - The distribution to combine with.
 	 * */
-	public void add( RecencyDistribution distribution ){
+	public void add( Distribution distribution ){
 		
 		for( int i = 0; i < distribution.getDistribution().size(); i++ ){
 			for( int j = 0; j < distribution.getDistribution().get(i).getY(); j++ ){
-				addRecencyValue( distribution.getDistribution().get(i).getX() );
+				addValue( distribution.getDistribution().get(i).getX() );
 			}	
 		}
 
@@ -159,16 +159,16 @@ public class RecencyDistribution {
 	/** This method combines two distributions to create a frequency distribution.
 	 *  @param distribution - The distribution to combine with.
 	 * */
-	public static RecencyDistribution addToFrequency( RecencyDistribution distribution1, RecencyDistribution distribution2 ){
+	public static Distribution addToFrequency( Distribution distribution1, Distribution distribution2 ){
 		
-		RecencyDistribution distribution = new RecencyDistribution();
+		Distribution distribution = new Distribution();
 		
 		for( int i = 0; i < distribution1.getDistribution().size(); i++ ){
-			distribution.addRecencyValue( distribution1.getDistribution().get(i).getX() );
+			distribution.addValue( distribution1.getDistribution().get(i).getX() );
 		}
 		
 		for( int i = 0; i < distribution2.getDistribution().size(); i++ ){
-			distribution.addRecencyValue( distribution2.getDistribution().get(i).getX() );
+			distribution.addValue( distribution2.getDistribution().get(i).getX() );
 		}
 		
 		return distribution;

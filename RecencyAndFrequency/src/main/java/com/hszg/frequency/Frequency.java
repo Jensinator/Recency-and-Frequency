@@ -1,6 +1,6 @@
 package com.hszg.frequency;
 
-import com.hszg.dto.RecencyDistribution;
+import com.hszg.dto.Distribution;
 import com.hszg.recency.Recency;
 import com.kianaanalytics.computeNode.model.ObservationsOfClientMac;
 import com.kianaanalytics.computeNode.model.PersonVisibleResult;
@@ -12,22 +12,22 @@ public class Frequency {
 	 *  @param observations - observations for each client mac address.
 	 *  @return The distribution for frequency.
 	 * */
-	public static RecencyDistribution compute( PersonVisibleResult observations ){
+	public static Distribution compute( PersonVisibleResult observations ){
 		
-		RecencyDistribution distribution = new RecencyDistribution();
+		Distribution distribution = new Distribution();
 		
 		for( int i = 0; i < observations.keySet().size(); i++ ){
 			
 			String clientMac = observations.keySet().toArray()[i].toString();
 				
-			RecencyDistribution clientDistribution;
+			Distribution clientDistribution;
 			try{
 				clientDistribution = Recency.compute(clientMac, observations);
 			}catch(Exception unexpected){
-				clientDistribution = new RecencyDistribution();
+				clientDistribution = new Distribution();
 			}
 			
-			RecencyDistribution frequency = RecencyDistribution.addToFrequency(distribution, clientDistribution);
+			Distribution frequency = Distribution.addToFrequency(distribution, clientDistribution);
 			
 			distribution.add(frequency);
 			

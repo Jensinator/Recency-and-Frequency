@@ -8,7 +8,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.hszg.dto.RecencyDistribution;
+import com.hszg.dto.Distribution;
 import com.kianaanalytics.computeNode.dataaccess.PersonVisibleAccessService;
 import com.kianaanalytics.computeNode.model.PersonVisibleResult;
 
@@ -19,12 +19,12 @@ public class Frequency  {
 	@GET
 	@Path("/FrequencyDistribution")
 	@Produces(MediaType.APPLICATION_JSON)
-	public RecencyDistribution getFrequencyDistribution(){
+	public Distribution getFrequencyDistribution(){
 			
 		PersonVisibleAccessService observationService = new PersonVisibleAccessService();
 		PersonVisibleResult observations = observationService.computePersonVisible();
 		
-		RecencyDistribution distribution = new RecencyDistribution();
+		Distribution distribution = new Distribution();
 		
 		try{
 			distribution = com.hszg.frequency.Frequency.compute(observations);

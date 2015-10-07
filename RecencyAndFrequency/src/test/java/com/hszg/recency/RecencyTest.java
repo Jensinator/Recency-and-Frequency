@@ -9,8 +9,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.hszg.dto.RecencyDistribution;
-import com.hszg.dto.RecencyDistribution.Point;
+import com.hszg.dto.Distribution;
+import com.hszg.dto.Distribution.Point;
 import com.kianaanalytics.computeNode.model.PartialObservation;
 import com.kianaanalytics.computeNode.model.PersonVisibleCondition;
 import com.kianaanalytics.computeNode.model.PersonVisibleResult;
@@ -50,7 +50,7 @@ public class RecencyTest {
 	@Test
 	public void test() {
 		
-		RecencyDistribution distribution;
+		Distribution distribution;
 		
 		try{
 			 distribution = Recency.compute(clientMac,personVisibleResult);
@@ -60,7 +60,7 @@ public class RecencyTest {
 		}
 		
 		List<Point> expectedResult = new ArrayList<Point>();
-		Point point = new RecencyDistribution.Point(RecencyDistribution.NO_RECENCY,1);
+		Point point = new Distribution.Point(Distribution.NO_RECENCY,1);
 		expectedResult.add( point );
 		
 		Assert.assertEquals( expectedResult, distribution.getDistribution());
